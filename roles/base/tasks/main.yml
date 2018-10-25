@@ -16,3 +16,12 @@
     - build-essential
     - xrdp
   tags: packages
+
+- name: create locale ja_JP.UTF-8
+  locale_gen: name=ja_JP.UTF-8
+  tags: config
+
+- name: set default locale to ja_JP.UTF-8
+  command: update-locale LANG=ja_JP.UTF-8
+  when: ansible_env.LANG | default('') != 'ja_JP.UTF-8'
+  tags: config

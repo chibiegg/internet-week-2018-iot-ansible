@@ -1,6 +1,8 @@
 
 
-## qemu
+## MEMO
+
+### qemu
 
 ```
 qemu-system-arm -kernel raspbian_bootpart/kernel-qemu-4.14.50-stretch \
