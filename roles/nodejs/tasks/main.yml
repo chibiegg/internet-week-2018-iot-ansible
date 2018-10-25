@@ -1,0 +1,25 @@
+- name: install required packages
+  apt: name="{{ item }}" state=latest
+  with_items:
+    - npm
+    - nodejs
+  tags:
+    - packages
+    - nodejs
+
+- name: install n
+  npm: name=n global=yes
+  tags:
+    - nodejs
+
+- name: check installed version
+  stat: path=/usr/local/n/versions/node/{{ nodejs_version }}
+  tags:
+    - nodejs
+  register: stat_node
+
+- name: install node.js
+  shell: n {{ nodejs_version }} && n use {{ nodejs_version }}
+  when: not stat_node.stat.exists
+  tags:
+    - nodejs

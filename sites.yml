@@ -2,3 +2,5 @@
   become: yes
   roles:
     - base
+    - nodejs
+    - node-red

@@ -1,0 +1,2 @@
+- name: reload services
+  shell: systemctl daemon-reload

@@ -1,0 +1,12 @@
+- name: install node-red
+  npm: name=node-red state=latest global=yes
+  tags: node-red
+
+- name: create systemd service
+  template: src=node-red.service dest=/etc/systemd/system/node-red.service owner=root group=root mode=0644
+  tags: node-red
+  notify: reload services
+
+- name: enable and start service
+  service: name=node-red state=started enabled=yes
+  tags: node-red
