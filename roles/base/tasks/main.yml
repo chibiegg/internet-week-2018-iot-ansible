@@ -1,0 +1,18 @@
+- name : Set Timezone
+  timezone: name=Asia/Tokyo
+  tags: config
+
+- name: Set Keymap
+  template: src=keyboard dest=/etc/default/keyboard owner=root group=root mode=0644
+  notify: update keymap
+  tags: config
+
+- name: install required packages
+  apt: name="{{ item }}" state=latest update_cache=yes
+  with_items:
+    - fonts-noto
+    - uim
+    - uim-anthy
+    - build-essential
+    - xrdp
+  tags: packages

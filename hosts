@@ -1,0 +1,7 @@
+[raspi]
+192.168.100.10
+
+[raspi:vars]
+ansible_ssh_user=pi
+ansible_ssh_pass=raspberry
+#ansible_sudo_pass=
