@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Node-RED
+Icon=chrome-http___127.0.0.1_jp_
+Exec=/usr/bin/chromium-browser --app=http://127.0.0.1:1880/

@@ -10,3 +10,7 @@
 - name: enable and start service
   service: name=node-red state=started enabled=yes
   tags: node-red
+
+- name: create desktop shortcut
+  template: src=Node-RED.desktop dest=/home/pi/Desktop/Node-RED.desktop owner=pi group=pi mode=0644
+  tags: node-red
