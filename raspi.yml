@@ -1,0 +1,6 @@
+- hosts: raspi
+  become: yes
+  roles:
+    - raspi/base
+    - raspi/nodejs
+    - raspi/node-red

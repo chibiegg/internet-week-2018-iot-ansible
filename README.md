@@ -1,5 +1,12 @@
 
 
+## Raspberry Pi
+
+```bash
+ansible-playbook -i hosts raspi.yml
+```
+
+
 ## MEMO
 
 ### qemu

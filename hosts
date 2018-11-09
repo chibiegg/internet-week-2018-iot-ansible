@@ -6,3 +6,10 @@ ansible_ssh_user=pi
 ansible_ssh_pass=raspberry
 #ansible_sudo_pass=
 nodejs_version=11.0.0
+
+
+[zabbix]
+163.43.114.179
+
+[zabbix:vars]
+ansible_ssh_user=ubuntu
