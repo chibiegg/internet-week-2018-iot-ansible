@@ -1,0 +1,7 @@
+
+- name: systemctrl daemon reload
+  shell: systemctl daemon-reload
+  ignore_errors: yes
+
+- name: restart zabbix
+  service: name=zabbix state=restarted

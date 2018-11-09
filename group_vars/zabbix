@@ -1,0 +1,25 @@
+ufw_rules:
+  - name: "ssh"
+    src: 0.0.0.0/0
+    dest: 0.0.0.0/0
+    interface:
+    port: 22
+    proto: any
+    direction: in
+    rule: allow
+  - name: "http"
+    src: 0.0.0.0/0
+    dest: 0.0.0.0/0
+    interface:
+    port: 80
+    proto: any
+    direction: in
+    rule: allow
+  - name: "https"
+    src: 0.0.0.0/0
+    dest: 0.0.0.0/0
+    interface:
+    port: 443
+    proto: any
+    direction: in
+    rule: allow

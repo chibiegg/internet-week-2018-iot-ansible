@@ -1,0 +1,14 @@
+- name: copy files
+  copy: src="opt/zabbix" dest="/opt/" owner=root group=root
+  tags: zabbix
+
+- name: create zabbix service
+  template: src=zabbix.service dest=/etc/systemd/system/zabbix.service owner=root group=root mode=0644
+  tags: zabbix
+  notify:
+    - systemctrl daemon reload
+    - restart zabbix
+
+- name: enable zabbix service
+  service: name=zabbix state=started enabled=yes
+  tags: zabbix

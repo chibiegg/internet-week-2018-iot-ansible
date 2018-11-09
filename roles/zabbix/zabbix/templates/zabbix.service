@@ -1,0 +1,23 @@
+[Unit]
+Description=zabbix with docker-compose
+Requires=docker.service
+
+[Service]
+User=root
+Type=simple
+
+Environment=COMPOSE_FILE=/opt/zabbix/docker-compose.yml
+
+ExecStartPre=-/usr/bin/docker-compose -f ${COMPOSE_FILE} kill
+ExecStartPre=-/usr/bin/docker-compose -f ${COMPOSE_FILE} down
+
+ExecStart=/usr/bin/docker-compose -f ${COMPOSE_FILE} up --abort-on-container-exit
+
+ExecStop=/usr/bin/docker-compose -f ${COMPOSE_FILE} stop
+ExecStopPost=-/usr/bin/docker-compose -f ${COMPOSE_FILE} down
+
+Restart=always
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

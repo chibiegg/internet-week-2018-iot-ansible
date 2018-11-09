@@ -1,0 +1,31 @@
+
+- name: ntp
+  copy: src=etc/default/ntp dest=/etc/default/ntp owner=root group=root mode=0644
+  notify: restart ntpd
+  tags: ntp
+
+- name: create .ssh directory
+  file: path=/home/ubuntu/.ssh state=directory owner=ubuntu group=ubuntu mode=0700
+  tags: users
+
+- name: create authorized_keys
+  copy: src=authorized_keys dest=/home/ubuntu/.ssh/authorized_keys owner=ubuntu group=ubuntu mode=0600
+  tags: users
+
+- name: configure sudoers
+  template: src=00_common.sudo.j2 dest=/etc/sudoers.d/00_common owner=root group=root mode=0440
+  tags: users
+
+- name: Apply group firewall rules
+  ufw: rule={{ item.rule }} src={{ item.src }} dest={{ item.dest }} port={{ item.port }} proto={{ item.proto }} interface={{ item.interface }} direction={{ item.direction }}
+  with_items:
+    - "{{ ufw_rules }}"
+  tags: ufw
+
+- name: Set firewall default policy
+  ufw: state=enabled policy=reject
+  tags: ufw
+
+- name: Use sakura apt repository
+  replace: path=/etc/apt/sources.list regexp="jp.archive.ubuntu.com/ubuntu" replace="ftp.sakura.ad.jp/pub/linux/ubuntu"
+  tags: apt
