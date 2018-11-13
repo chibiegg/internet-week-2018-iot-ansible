@@ -9,6 +9,8 @@ services:
       - MYSQL_USER=zabbix
       - MYSQL_PASSWORD=vKxkoF0E82vD
       - MYSQL_ROOT_PASSWORD=zLwY30UVdHV8
+    volumes:
+      - mysql:/var/lib/mysql
     # development only
     ports:
       - "13306:3306"
@@ -58,3 +60,6 @@ services:
       - "10050"
     links:
       - zabbix_server
+
+volumes:
+  mysql:

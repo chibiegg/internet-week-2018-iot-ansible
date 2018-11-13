@@ -1,5 +1,5 @@
 [raspi]
-172.31.25.177
+192.168.212.83
 
 [raspi:vars]
 ansible_ssh_user=pi
@@ -9,7 +9,7 @@ nodejs_version=11.0.0
 
 
 [zabbix]
-163.43.114.179
+153.120.91.27
 
 [zabbix:vars]
 ansible_ssh_user=ubuntu
