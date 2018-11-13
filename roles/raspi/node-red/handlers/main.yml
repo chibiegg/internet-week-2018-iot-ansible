@@ -1,2 +1,5 @@
 - name: reload services
   shell: systemctl daemon-reload
+
+- name: restart node-red
+  service: name=node-red state=restarted

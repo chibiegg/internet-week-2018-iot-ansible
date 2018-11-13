@@ -3,7 +3,7 @@
 ## Raspberry Pi
 
 ```bash
-ansible-playbook -i hosts raspi.yml
+ansible-playbook -i hosts -s raspi.yml
 ```
 
 

@@ -1,6 +1,23 @@
-- name: install node-red
-  npm: name=node-red state=latest global=yes
+- name: Download bmc2835 library
   tags: node-red
+  unarchive:
+    src: http://www.airspayce.com/mikem/bcm2835/bcm2835-1.57.tar.gz
+    dest: /usr/src
+    remote_src: yes
+
+- name: install bmc2835 library
+  tags: node-red
+  shell: ./configure && make && make install && npm install -g --unsafe-perm node-dht-sensor node-red-contrib-dht-sensor
+  args:
+    chdir: /usr/src/bcm2835-1.57
+
+- name: install node-red and nodes
+  npm: name="{{item}}" state=latest global=yes
+  tags: node-red
+  with_items:
+    - node-red
+    - node-red-dashboard
+  notify: restart node-red
 
 - name: create systemd service
   template: src=node-red.service dest=/etc/systemd/system/node-red.service owner=root group=root mode=0644
