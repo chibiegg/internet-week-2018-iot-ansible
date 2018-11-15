@@ -1,3 +1,22 @@
+- name: create node-red data directories
+  file: path="{{item}}" state=directory mode=0755 owner=root group=root
+  tags: node-red
+  with_items:
+    - /opt/node-red
+    - /opt/node-red/nodes
+    - /opt/node-red/lib/flows/
+
+- name: copy files
+  copy: src="{{item}}" dest="/opt/node-red/{{item}}" mode=0644 owner=root group=root
+  tags: node-red
+  with_items:
+    - settings.js
+    - lib/flows/DHT11.json
+    - lib/flows/API.json
+    - lib/flows/GPIO.json
+    - lib/flows/Zabbix.json
+    - lib/flows/complete.json
+
 - name: Download bmc2835 library
   tags: node-red
   unarchive:
@@ -10,6 +29,10 @@
   shell: ./configure && make && make install && npm install -g --unsafe-perm node-dht-sensor node-red-contrib-dht-sensor
   args:
     chdir: /usr/src/bcm2835-1.57
+
+- name: patch node-red-contrib-dht-sensor
+  copy: src="dht22-node.js" dest="/usr/local/lib/node_modules/node-red-contrib-dht-sensor/dht22-node/dht22-node.js"
+  tags: node-red
 
 - name: install node-red and nodes
   npm: name="{{item}}" state=latest global=yes

@@ -1,0 +1,438 @@
+[
+    {
+        "id": "dd1252d3.6c959",
+        "type": "tab",
+        "label": "API",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "96312baf.969208",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/api/led",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "af0a6b3.50eac98"
+            ]
+        ]
+    },
+    {
+        "id": "179d8d1.9573473",
+        "type": "http response",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "af0a6b3.50eac98",
+        "type": "template",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"value\": {{global.led}}\n}",
+        "output": "json",
+        "x": 460,
+        "y": 380,
+        "wires": [
+            [
+                "179d8d1.9573473"
+            ]
+        ]
+    },
+    {
+        "id": "86d69ec4.df829",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/api/led/on",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "dafedb3b.cac828"
+            ]
+        ]
+    },
+    {
+        "id": "dafedb3b.cac828",
+        "type": "change",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 520,
+        "wires": [
+            [
+                "b9cb56cc.1f08c8",
+                "30d42fb9.4c42f"
+            ]
+        ]
+    },
+    {
+        "id": "8ecad27a.19ccc",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/api/led/off",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 580,
+        "wires": [
+            [
+                "e30a29da.2379a8"
+            ]
+        ]
+    },
+    {
+        "id": "e30a29da.2379a8",
+        "type": "change",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 580,
+        "wires": [
+            [
+                "b9cb56cc.1f08c8",
+                "30d42fb9.4c42f"
+            ]
+        ]
+    },
+    {
+        "id": "b9cb56cc.1f08c8",
+        "type": "link out",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "links": [
+            "110fa67a.361b1a"
+        ],
+        "x": 535,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "30d42fb9.4c42f",
+        "type": "template",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"value\": {{ payload }}\n}",
+        "output": "json",
+        "x": 580,
+        "y": 580,
+        "wires": [
+            [
+                "1b6a8ff8.9cef6"
+            ]
+        ]
+    },
+    {
+        "id": "1b6a8ff8.9cef6",
+        "type": "http response",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "795992f3.47ce1c",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/api/humidity",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "356257cf.1f52e8"
+            ]
+        ]
+    },
+    {
+        "id": "32d3bdda.c91412",
+        "type": "http response",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "356257cf.1f52e8",
+        "type": "template",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"value\": {{global.humidity}}\n}",
+        "output": "json",
+        "x": 460,
+        "y": 320,
+        "wires": [
+            [
+                "32d3bdda.c91412"
+            ]
+        ]
+    },
+    {
+        "id": "deaa3cc4.6906f",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/api/temperature",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "903b2b8d.bf7978"
+            ]
+        ]
+    },
+    {
+        "id": "a4152c17.c4d93",
+        "type": "http response",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "903b2b8d.bf7978",
+        "type": "template",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"value\": {{global.temperature}}\n}",
+        "output": "json",
+        "x": 460,
+        "y": 260,
+        "wires": [
+            [
+                "a4152c17.c4d93"
+            ]
+        ]
+    },
+    {
+        "id": "8edfa8da.677068",
+        "type": "comment",
+        "z": "dd1252d3.6c959",
+        "name": "フロントエンド",
+        "info": "",
+        "x": 100,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6829c6fc.5b37a8",
+        "type": "comment",
+        "z": "dd1252d3.6c959",
+        "name": "POSTリクエスト",
+        "info": "",
+        "x": 100,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "73982cd1.f4d6b4",
+        "type": "comment",
+        "z": "dd1252d3.6c959",
+        "name": "to GPIO",
+        "info": "",
+        "x": 630,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "df298cfa.0505b",
+        "type": "http in",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "url": "/top/",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "458354b.c0a06ac"
+            ]
+        ]
+    },
+    {
+        "id": "458354b.c0a06ac",
+        "type": "template",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "plain",
+        "template": "<html>\n    <head>\n        <script src=\"https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js\"></script>\n        <script type=\"application/javascript\">\n          function update(){\n            $.get(\"/api/temperature\").then(function(data){\n              $(\"#temperature\").text(data.value);\n            });\n            $.get(\"/api/humidity\").then(function(data){\n              $(\"#humidity\").text(data.value);\n            });\n          }\n          \n          function setLed(status){\n            if(status){\n              $.post(\"/api/led/on\");\n            }else{\n              $.post(\"/api/led/off\");\n            }\n          }\n        \n          $(function(){\n              setInterval(update, 5000);\n          });\n\n          $(function(){\n            $(\"#led_on\").click(function(){setLed(true)});\n            $(\"#led_off\").click(function(){setLed(false)});\n          });\n        </script>\n    </head>\n    <body>\n        \n        <h2>Sensors</h2>\n        <ul>\n            <li>Temperature: <span id=\"temperature\"></span></li>\n            <li>Humidity: <span id=\"humidity\"></span></li>\n        </ul>\n        \n        <h2>LED</h2>\n        <button id=\"led_on\">ON</button>\n        <button id=\"led_off\">OFF</button>\n        \n    </body>\n</html>",
+        "output": "str",
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "a84e04f1.701e58"
+            ]
+        ]
+    },
+    {
+        "id": "a84e04f1.701e58",
+        "type": "http response",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5f0441d1.dd928",
+        "type": "comment",
+        "z": "dd1252d3.6c959",
+        "name": "GETリクエスト",
+        "info": "",
+        "x": 100,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "517141fd.21c61",
+        "type": "inject",
+        "z": "dd1252d3.6c959",
+        "name": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 720,
+        "wires": [
+            [
+                "4342609d.95906"
+            ]
+        ]
+    },
+    {
+        "id": "4342609d.95906",
+        "type": "change",
+        "z": "dd1252d3.6c959",
+        "name": "初期値代入",
+        "rules": [
+            {
+                "t": "set",
+                "p": "led",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "temperature",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "humidity",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "12e219cc.0bab46",
+        "type": "comment",
+        "z": "dd1252d3.6c959",
+        "name": "グローバル変数初期化",
+        "info": "",
+        "x": 120,
+        "y": 660,
+        "wires": []
+    }
+]

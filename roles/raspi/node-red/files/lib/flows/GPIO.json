@@ -1,0 +1,100 @@
+[
+    {
+        "id": "134c1005.ef209",
+        "type": "tab",
+        "label": "GPIO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "623baef3.28b32",
+        "type": "debug",
+        "z": "134c1005.ef209",
+        "name": "",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 610,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "59257c15.876734",
+        "type": "link in",
+        "z": "134c1005.ef209",
+        "name": "",
+        "links": [
+            "5d55f853.9130f8"
+        ],
+        "x": 255,
+        "y": 180,
+        "wires": [
+            [
+                "623baef3.28b32",
+                "d43719a.6d007e8",
+                "a37203af.313a1"
+            ]
+        ]
+    },
+    {
+        "id": "d43719a.6d007e8",
+        "type": "change",
+        "z": "134c1005.ef209",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "led",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a37203af.313a1",
+        "type": "rpi-gpio out",
+        "z": "134c1005.ef209",
+        "name": "",
+        "pin": "38",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 600,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ed2fb5e1.5e0e38",
+        "type": "comment",
+        "z": "134c1005.ef209",
+        "name": "LED",
+        "info": "",
+        "x": 70,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5d3b604c.9e432",
+        "type": "comment",
+        "z": "134c1005.ef209",
+        "name": "from API",
+        "info": "",
+        "x": 140,
+        "y": 180,
+        "wires": []
+    }
+]

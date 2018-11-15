@@ -1,0 +1,250 @@
+[
+    {
+        "id": "c22b9518.46e448",
+        "type": "tab",
+        "label": "DHT11",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a9608691.6b09b8",
+        "type": "rpi-dht22",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "topic": "rpi-dht11",
+        "dht": "11",
+        "pintype": "0",
+        "pin": "18",
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "334aabd4.795ac4"
+            ]
+        ]
+    },
+    {
+        "id": "454e834e.b57abc",
+        "type": "debug",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 790,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9549efa7.92a27",
+        "type": "inject",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "a9608691.6b09b8"
+            ]
+        ]
+    },
+    {
+        "id": "d10b372b.949848",
+        "type": "change",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 160,
+        "wires": [
+            [
+                "454e834e.b57abc",
+                "3087940f.5b8a5c"
+            ]
+        ]
+    },
+    {
+        "id": "c4c71eea.025f3",
+        "type": "change",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$number(msg.humidity)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "732c1706.932778",
+                "a192b873.3f98f8"
+            ]
+        ]
+    },
+    {
+        "id": "732c1706.932778",
+        "type": "debug",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 790,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a192b873.3f98f8",
+        "type": "change",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "humidity",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3087940f.5b8a5c",
+        "type": "change",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75c453cf.a4774c",
+        "type": "comment",
+        "z": "c22b9518.46e448",
+        "name": "温湿度センサー",
+        "info": "",
+        "x": 100,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "334aabd4.795ac4",
+        "type": "switch",
+        "z": "c22b9518.46e448",
+        "name": "",
+        "property": "isValid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "d10b372b.949848",
+                "c4c71eea.025f3"
+            ],
+            [
+                "31338901.47bef6"
+            ]
+        ]
+    },
+    {
+        "id": "31338901.47bef6",
+        "type": "change",
+        "z": "c22b9518.46e448",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "a192b873.3f98f8",
+                "732c1706.932778",
+                "3087940f.5b8a5c",
+                "454e834e.b57abc"
+            ]
+        ]
+    }
+]

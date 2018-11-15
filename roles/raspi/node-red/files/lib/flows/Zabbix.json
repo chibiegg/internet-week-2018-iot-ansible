@@ -1,0 +1,146 @@
+[
+    {
+        "id": "a4eeadf9.d80ba",
+        "type": "tab",
+        "label": "Zabbix",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "47efb7a0.bbbc58",
+        "type": "inject",
+        "z": "a4eeadf9.d80ba",
+        "name": "",
+        "topic": "",
+        "payload": "raspberrypi-test",
+        "payloadType": "str",
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "a966f417.f0c2a8"
+            ]
+        ]
+    },
+    {
+        "id": "a966f417.f0c2a8",
+        "type": "template",
+        "z": "a4eeadf9.d80ba",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"request\": \"sender data\",\n    \"data\": [\n        {\n            \"host\": \"{{payload}}\",\n            \"key\": \"temperature\",\n            \"value\": \"{{global.temperature}}\"\n        },\n        {\n            \"host\": \"{{payload}}\",\n            \"key\": \"humidity\",\n            \"value\": \"{{global.humidity}}\"\n        }\n    ]\n}",
+        "output": "str",
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "6d59ad0d.62c1c4",
+                "3fd9d7cf.d96388"
+            ]
+        ]
+    },
+    {
+        "id": "6d59ad0d.62c1c4",
+        "type": "function",
+        "z": "a4eeadf9.d80ba",
+        "name": "build request",
+        "func": "var length = msg.payload.length;\nvar buf = Buffer.alloc(4 + 1 + 8 + length);\n\n// Write Header\nbuf.write(\"ZBXD\", 0);\nbuf.writeInt8(0x01, 4);\nbuf.writeInt32LE(length, 5);\n\n// Write Data\nbuf.write(msg.payload, 13);\n\nmsg.payload = buf;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "9540e13a.dec2c"
+            ]
+        ]
+    },
+    {
+        "id": "9540e13a.dec2c",
+        "type": "tcp request",
+        "z": "a4eeadf9.d80ba",
+        "server": "zabbix.iw.ishikari-dc.jp",
+        "port": "10051",
+        "out": "time",
+        "splitc": "1000",
+        "name": "",
+        "x": 320,
+        "y": 320,
+        "wires": [
+            [
+                "a522c262.20d3a"
+            ]
+        ]
+    },
+    {
+        "id": "e3b2fd5.5d899",
+        "type": "debug",
+        "z": "a4eeadf9.d80ba",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 610,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a522c262.20d3a",
+        "type": "function",
+        "z": "a4eeadf9.d80ba",
+        "name": "prase response",
+        "func": "response = JSON.parse(msg.payload.slice(13).toString());\nmsg.response = response.response;\nmsg.payload = response.info;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "e3b2fd5.5d899"
+            ]
+        ]
+    },
+    {
+        "id": "3fd9d7cf.d96388",
+        "type": "debug",
+        "z": "a4eeadf9.d80ba",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "eb06dd62.5f737",
+        "type": "comment",
+        "z": "a4eeadf9.d80ba",
+        "name": "Zabbix",
+        "info": "",
+        "x": 70,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1d8a6ee5.32bc81",
+        "type": "comment",
+        "z": "a4eeadf9.d80ba",
+        "name": "ホスト名を設定",
+        "info": "",
+        "x": 140,
+        "y": 120,
+        "wires": []
+    }
+]

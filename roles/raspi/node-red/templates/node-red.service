@@ -3,7 +3,7 @@ Description=Node-RED for Raspberry Pi
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/node /usr/local/lib/node_modules/node-red/red.js -s /usr/local/lib/node_modules/node-red/settings.js
+ExecStart=/usr/local/bin/node /usr/local/lib/node_modules/node-red/red.js -s /opt/node-red/settings.js
 Restart=always
 
 [Install]
