@@ -68,7 +68,7 @@
         "type": "rpi-gpio out",
         "z": "134c1005.ef209",
         "name": "",
-        "pin": "38",
+        "pin": "36",
         "set": "",
         "level": "0",
         "freq": "",

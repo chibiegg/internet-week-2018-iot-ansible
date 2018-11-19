@@ -17,6 +17,10 @@
     - lib/flows/Zabbix.json
     - lib/flows/complete.json
 
+- name: copy restart shortcut
+  copy: src="Restart Node-RED" dest="/home/pi/Desktop/Restart Node-RED" owner=pi group=pi mode=0755
+  tags: node-red
+
 - name: Download bmc2835 library
   tags: node-red
   unarchive:

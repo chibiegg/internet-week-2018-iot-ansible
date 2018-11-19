@@ -1,0 +1,3 @@
+- name: example files
+  copy: src=iw2018 dest=/home/pi/ owner=pi group=root
+  tags: handson
